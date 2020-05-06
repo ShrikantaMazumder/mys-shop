@@ -1,7 +1,7 @@
 import React from 'react';
 import './Product.css';
 
-const Product = ({id, title, brand, price, image_url}) => {
+const Product = ({id, title, brand, price, image_url, addCartItem}) => {
     return (
         <div className="product">
             <img src={image_url} alt={title}/>
@@ -11,17 +11,17 @@ const Product = ({id, title, brand, price, image_url}) => {
             </div>
             <div className="actions">
                 <span>$ {price}</span>
-                <button>Add to cart</button>
+                <button onClick={() => addCartItem(id)}>Add to cart</button>
             </div>
         </div>
     );
 }
 
-const ProductList = ({products}) => {
+const ProductList = ({products, addCartItem}) => {
     
     return (
     <div className="product-list">
-        {products.map(product => <Product key={product.id} {...product}></Product>)}
+        {products.map(product => <Product key={product.id} {...product} addCartItem={addCartItem} />)}
     </div>
     );
 };
