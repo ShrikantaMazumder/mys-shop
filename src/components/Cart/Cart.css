@@ -34,3 +34,11 @@
     justify-content: space-between;
   }
 
+  .cart-item .info button {
+    width: 100px;
+    color: white;
+    padding: 5px;
+    border: none;
+    font-weight: bold;
+  }
+
