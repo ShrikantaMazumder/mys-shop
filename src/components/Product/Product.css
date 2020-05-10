@@ -32,3 +32,7 @@
 .product .actions {
   border-top: 1px solid grey;
 }
+.product-list.dark{
+  background-color: black;
+  color: white;
+}

@@ -3,3 +3,7 @@
   flex-flow: row wrap;
   justify-content: space-evenly;
 }
+.App.dark{
+  background-color: black;
+  color: white;
+}

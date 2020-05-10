@@ -41,4 +41,7 @@
     border: none;
     font-weight: bold;
   }
-
+  .cart.dark{
+    background-color: black;
+    color: white;
+  }

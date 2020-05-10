@@ -5,11 +5,13 @@ import Cart from './components/Cart/Cart';
 import data from './data';
 import ProductList from './components/Product/Product';
 import useCart from './components/custom_hooks/useCart';
+import ThemeContext from './components/Context/ThemeContext';
 
 
 const App = () => {
   const [products, setProducts] = useState([...data]);
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [dark, setDark] = useState(false);
   const {cartItems, addCartItem, removeCartItem, clearCart} = useCart([], products);
 
   useEffect(() => {
@@ -19,14 +21,20 @@ const App = () => {
 
   },[searchKeyword]);
 
+  const toggleDark = () => {
+    setDark(isDark => !isDark);
+  }
+
   
 
   return (
-    <div className="App">
-      <NavBar setSearchKeyword={setSearchKeyword} />
-      <ProductList products={products} addCartItem={addCartItem} />
-      <Cart cartItems={cartItems} removeCartItem={removeCartItem} clearCart={clearCart} />
-    </div>
+    <ThemeContext.Provider value={{ dark: dark, toggle: toggleDark }}>
+      <div className={`App ${dark ? 'dark' : 'light'}`}>
+        <NavBar setSearchKeyword={setSearchKeyword} />
+        <ProductList products={products} addCartItem={addCartItem} />
+        <Cart cartItems={cartItems} removeCartItem={removeCartItem} clearCart={clearCart} />
+      </div>
+    </ThemeContext.Provider>
   );
 }
 
