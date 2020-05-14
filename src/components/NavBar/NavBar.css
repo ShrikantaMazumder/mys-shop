@@ -10,6 +10,18 @@
     position: sticky;
     top: 0;
   }
+
+  .nav-bar .links {
+    position: absolute;
+    right: 20px;
+  }
+
+  .nav-bar .links a {
+    text-decoration: none;
+    color: white;
+    border: 1px solid grey;
+    padding: 2px 5px;
+  }
   
   .nav-bar input {
     height: 25px;
@@ -20,5 +32,3 @@
     border-radius: 5px;
     font-size: 15px;
   }
-
-  

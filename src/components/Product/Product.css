@@ -11,6 +11,10 @@
   border: 1px solid grey;
 }
 
+.product a {
+  text-decoration: none;
+}
+
 .product img {
   width: 100%;
 }

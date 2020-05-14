@@ -1,38 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
-import Cart from './components/Cart/Cart';
-import data from './data';
-import ProductList from './components/Product/Product';
-import useCart from './components/custom_hooks/useCart';
 import ThemeContext from './components/Context/ThemeContext';
+import Checkout from './components/Checkout/Checkout';
+import ProductDetails from './components/Product/ProductDetails';
+import Home from './components/Home/Home';
 
 
 const App = () => {
-  const [products, setProducts] = useState([...data]);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [dark, setDark] = useState(false);
-  const {cartItems, addCartItem, removeCartItem, clearCart} = useCart([], products);
-
-  useEffect(() => {
-    const results = data.filter(product => product.title.includes(searchKeyword) || product.brand.includes(searchKeyword));
-
-    setProducts(results);
-
-  },[searchKeyword]);
 
   const toggleDark = () => {
     setDark(isDark => !isDark);
   }
 
-  
-
   return (
     <ThemeContext.Provider value={{ dark: dark, toggle: toggleDark }}>
       <div className={`App ${dark ? 'dark' : 'light'}`}>
-        <NavBar setSearchKeyword={setSearchKeyword} />
-        <ProductList products={products} addCartItem={addCartItem} />
-        <Cart cartItems={cartItems} removeCartItem={removeCartItem} clearCart={clearCart} />
+        <Router>
+          <NavBar setSearchKeyword={setSearchKeyword} />
+          <Switch>
+
+            <Route path='/checkout' component={Checkout} />
+
+            <Route path='/product-details/:id' component={ProductDetails} />
+
+            <Route path="/" component={()=><Home searchKeyword={searchKeyword} />} />
+
+            {/* <Route path="/checkout">
+              <Checkout></Checkout>
+            </Route> */}
+            {/* <Route path="/product-details/:id">
+              <ProductDetails />
+            </Route> */}
+            {/* <Route exact path="/">
+              <Home></Home>
+            </Route> */}
+
+          </Switch>
+        </Router>
       </div>
     </ThemeContext.Provider>
   );
